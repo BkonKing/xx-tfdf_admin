@@ -66,11 +66,12 @@ export default {
             this.multipleUploadImage(resultFiles, insertImgFn)
           }
         },
-        uploadImgServer: '/library/um_editors/upload_file/upload_json.php',
+        uploadImgServer: '/uploads/uImages',
         uploadFileName: 'imgFile',
         uploadImgParams: {
           dir: 'image'
         },
+        uploadImgMaxSize: 1000 * 1024 * 1024,
         uploadImgHooks: {
           customInsert: (insertImgFn, result) => {
 
@@ -103,16 +104,18 @@ export default {
   methods: {
     uploadImage (file, insertImgFn) {
       const formData = new FormData()
-      Object.entries(this.editorConfig.uploadImgParams).forEach(
-        ([key, value]) => {
-          formData.append(key, value)
-        }
-      )
+      // Object.entries(this.editorConfig.uploadImgParams).forEach(
+      //   ([key, value]) => {
+      //     formData.append(key, value)
+      //   }
+      // )
       formData.append(this.editorConfig.uploadFileName, file)
       return axios({
         url: this.editorConfig.uploadImgServer,
         method: 'post',
-        baseURL: '',
+        baseURL: process.env.NODE_ENV === 'production'
+          ? process.env.VUE_APP_API_BASE_URL
+          : '/api',
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -131,7 +134,7 @@ export default {
     },
     customInsert (insertImgFn, result) {
       // insertImgFn 可把图片插入到编辑器，传入图片 src ，执行函数即可
-      const { url } = result
+      const { data: url } = result
       insertImgFn(url)
       // 上传图片，返回结果，将图片插入到编辑器中
       const img = new Image()

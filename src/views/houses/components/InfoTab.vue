@@ -38,7 +38,7 @@
         }}</a-descriptions-item>
       </a-descriptions>
     </a-card>
-    <a-card title="户型介绍" :bordered="false" style="margin-top: 24px;">
+    <a-card v-if="haveHouse" title="户型介绍" :bordered="false" style="margin-top: 24px;">
       <div v-for="(item, index) in data.house" :key="index" class="house-box">
         <h3>{{ item.title }}</h3>
         <div style="display: flex;flex-wrap: wrap;">
@@ -62,9 +62,7 @@
             <div>{{ house.houseName }}</div>
             <div>
               {{ house.houseArea }}㎡
-              {{
-                Math.ceil((house.houseArea * house.averagePrice) / 10000)
-              }}万元起
+              {{ house.averagePrice }}万元起
             </div>
           </div>
         </div>
@@ -72,7 +70,8 @@
     </a-card>
     <a-card title="楼盘详情" :bordered="false" style="margin-top: 24px;">
       <a-row type="flex">
-        <a-col flex="375px" style="margin-right: 20px"></a-col>
+        <a-col flex="375px" style="margin-right: 20px">
+          <mobile-preview :data="data"></mobile-preview></a-col>
         <a-col flex="1">
           <div v-html="data.content"></div>
         </a-col>
@@ -82,7 +81,11 @@
 </template>
 
 <script>
+import MobilePreview from './MobilePreview.vue'
 export default {
+  components: {
+    MobilePreview
+  },
   props: {
     data: {
       type: Object,
@@ -92,6 +95,9 @@ export default {
   computed: {
     images () {
       return this.data.images.map(obj => obj.url)
+    },
+    haveHouse () {
+      return !Array.isArray(this.data.house)
     }
   },
   methods: {

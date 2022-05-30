@@ -247,7 +247,9 @@
           :rules="{ required: true, message: '请输入详情内容' }"
         >
           <a-row type="flex">
-            <a-col flex="375px" style="margin-right: 20px"></a-col>
+            <a-col flex="375px" style="margin-right: 20px">
+              <mobile-preview :data="formData"></mobile-preview>
+            </a-col>
             <a-col flex="1">
               <wang-editor
                 v-model="formData.content"
@@ -274,6 +276,7 @@ import chinaArea from '@/utils/chinaArea'
 import { validAForm } from '@/utils/util'
 import { appMixin } from '@/store/mixin'
 import { UploadImage, FooterToolbar } from '@/components'
+import MobilePreview from './components/MobilePreview.vue'
 import wangEditor from '@/components/Editor/WangEditor'
 import { addProject, updateProject, getProjectInfo } from '@/api/houses'
 import cloneDeep from 'lodash.clonedeep'
@@ -281,7 +284,8 @@ export default {
   components: {
     UploadImage,
     wangEditor,
-    FooterToolbar
+    FooterToolbar,
+    MobilePreview
   },
   mixins: [appMixin],
   data () {
@@ -461,6 +465,7 @@ export default {
           return obj
         })
         params.remarks = params.remarks || ''
+        params.contacts = params.contacts || ''
         params.listOrder = params.listOrder || ''
         params.provinceId = params.areas[0]
         params.cityId = params.areas[1]
