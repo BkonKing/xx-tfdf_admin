@@ -1,7 +1,7 @@
 <template>
   <page-header-wrapper :title="title">
     <template v-slot:extra>
-      <a-button v-if="RemovePermission" @click="handleRemove">删除</a-button>
+      <a-button v-if="RemovePermission && !userInfo.loginTime" @click="handleRemove">删除</a-button>
       <a-button v-if="UpdatePermission" type="primary" @click="openEdit">编辑</a-button>
     </template>
     <a-card title="基础信息" :bordered="false">

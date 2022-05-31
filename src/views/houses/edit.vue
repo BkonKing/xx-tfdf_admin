@@ -467,6 +467,8 @@ export default {
         params.remarks = params.remarks || ''
         params.contacts = params.contacts || ''
         params.listOrder = params.listOrder || ''
+        params.roomMinArea = params.roomMinArea || ''
+        params.roomMaxArea = params.roomMaxArea || ''
         params.provinceId = params.areas[0]
         params.cityId = params.areas[1]
         params.areaId = params.areas[2]

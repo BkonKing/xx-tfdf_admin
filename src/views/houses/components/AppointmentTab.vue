@@ -128,7 +128,7 @@ export default {
         {
           title: '预约编号',
           dataIndex: 'id',
-          width: 80
+          width: 94
         },
         {
           title: '状态',
@@ -138,16 +138,19 @@ export default {
         {
           title: '预约时间',
           dataIndex: 'yytime',
-          width: 100,
+          width: 150,
           sorter: true
         },
         {
           title: '客户',
           dataIndex: 'userRealname',
-          width: '100px',
+          width: '116px',
           customRender: (text, row) => {
+            const href = this.$router.resolve({
+              path: `/client/detail?id=${row.userId}`
+            }).href
             return (
-              <a href={`/client/detail?id=${row.id}`} target="_blank">
+              <a href={href} target="_blank">
                 <div>{text}</div>
                 <div>{row.userMobile}</div>
               </a>
@@ -157,7 +160,7 @@ export default {
         {
           title: '预约联系',
           dataIndex: 'realname',
-          width: '100px',
+          width: '116px',
           customRender: (text, row) => {
             return (
               <div>
@@ -170,7 +173,6 @@ export default {
         {
           title: '意向信息',
           dataIndex: 'project',
-          width: '100px',
           customRender: (text, row) => {
             return (
               <div>
@@ -182,8 +184,7 @@ export default {
         },
         {
           title: '其他说明',
-          dataIndex: 'explain',
-          width: '100px'
+          dataIndex: 'explain'
         },
         {
           title: () => {
@@ -204,7 +205,7 @@ export default {
         {
           title: '创建时间',
           dataIndex: 'ctime',
-          width: 100,
+          width: 160,
           sorter: true
         }
       ],

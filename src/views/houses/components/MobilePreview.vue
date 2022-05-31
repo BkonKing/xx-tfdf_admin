@@ -39,6 +39,7 @@ export default {
   .mobile-content {
     width: 375px;
     height: calc(100% - 44px);
+    padding: 0 10px;
     overflow-y: auto;
   }
   .mobile-image-box {

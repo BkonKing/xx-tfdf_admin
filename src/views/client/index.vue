@@ -112,7 +112,7 @@
             <a v-if="permissions.UpdatePermission" @click="openEdit(record)"
               >编辑</a
             >
-            <a v-if="!record.loginTime || permissions.RemovePermission"
+            <a v-if="!record.loginTime && permissions.RemovePermission"
               ><a-popconfirm
                 title="确定要删除吗？"
                 ok-text="确定"

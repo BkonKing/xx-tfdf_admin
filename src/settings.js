@@ -23,7 +23,7 @@ export default {
   menu: {
     locale: true
   },
-  title: '永同达',
+  title: '选房管理系统',
   pwa: false,
   iconfontUrl: '',
   production: process.env.NODE_ENV === 'production' && process.env.VUE_APP_PREVIEW !== 'true'

@@ -20,14 +20,10 @@ const errorHandler = (error) => {
   if (error.response) {
     const data = error.response.data
     Message.error(data.msg)
-    // 从 localstorage 获取 token
-    const token = storage.get('access_token')
     if (error.response.status === 401) {
-      if (token) {
-        storage.remove('access_token')
-        store.commit('setLogout', true)
-        router.push({ name: 'login' })
-      }
+      storage.remove('access_token')
+      store.commit('setLogout', true)
+      router.push({ name: 'login' })
     }
   }
   return Promise.reject(error)

@@ -38,7 +38,7 @@ export default {
     },
     height: {
       type: Number,
-      default: 390
+      default: 587
     },
     zIndex: {
       type: Number,
@@ -55,7 +55,7 @@ export default {
         zIndex: this.zIndex,
         height: this.height,
         placeholder: this.placeholder,
-        excludeMenus: ['code', 'emoticon', 'video'],
+        excludeMenus: ['code', 'emoticon', 'video', 'link', 'table', 'todo', 'quote'],
         showFullScreen: true,
         customUploadImg: (resultFiles, insertImgFn) => {
           // resultFiles 是 input 中选中的文件列表

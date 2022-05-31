@@ -293,8 +293,11 @@ export default {
           dataIndex: 'userRealname',
           width: 100,
           customRender: (text, row) => {
+            const href = this.$router.resolve({
+              path: `/client/detail?id=${row.userId}`
+            }).href
             return (
-              <a href={`/client/detail?id=${row.id}`} target="__blank">
+              <a href={href} target="__blank">
                 <div>{text}</div>
                 <div>{row.userMobile}</div>
               </a>

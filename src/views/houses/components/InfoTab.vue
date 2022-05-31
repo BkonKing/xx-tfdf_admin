@@ -9,8 +9,7 @@
           >{{ data.averagePrice }}元/㎡</a-descriptions-item
         >
         <a-descriptions-item label="房间面积"
-          >{{ data.roomMinArea }} -
-          {{ data.roomMaxArea }}㎡</a-descriptions-item
+          >{{ roomArea }}㎡</a-descriptions-item
         >
         <a-descriptions-item label="咨询电话"
           >{{ data.mobile }} {{ data.contacts }}</a-descriptions-item
@@ -38,7 +37,12 @@
         }}</a-descriptions-item>
       </a-descriptions>
     </a-card>
-    <a-card v-if="haveHouse" title="户型介绍" :bordered="false" style="margin-top: 24px;">
+    <a-card
+      v-if="haveHouse"
+      title="户型介绍"
+      :bordered="false"
+      style="margin-top: 24px;"
+    >
       <div v-for="(item, index) in data.house" :key="index" class="house-box">
         <h3>{{ item.title }}</h3>
         <div style="display: flex;flex-wrap: wrap;">
@@ -60,10 +64,7 @@
               {{ house.statusv }}
             </div>
             <div>{{ house.houseName }}</div>
-            <div>
-              {{ house.houseArea }}㎡
-              {{ house.averagePrice }}万元起
-            </div>
+            <div>{{ house.houseArea }}㎡ {{ house.averagePrice }}万元起</div>
           </div>
         </div>
       </div>
@@ -71,7 +72,8 @@
     <a-card title="楼盘详情" :bordered="false" style="margin-top: 24px;">
       <a-row type="flex">
         <a-col flex="375px" style="margin-right: 20px">
-          <mobile-preview :data="data"></mobile-preview></a-col>
+          <mobile-preview :data="data"></mobile-preview
+        ></a-col>
         <a-col flex="1">
           <div v-html="data.content"></div>
         </a-col>
@@ -98,6 +100,15 @@ export default {
     },
     haveHouse () {
       return !Array.isArray(this.data.house)
+    },
+    roomArea () {
+      let { roomMinArea = 0, roomMaxArea = 0 } = this.data
+      roomMinArea = parseFloat(roomMinArea)
+      roomMaxArea = parseFloat(roomMaxArea)
+      if (roomMinArea > 0 && roomMaxArea > 0) {
+        return `${roomMinArea} - ${roomMaxArea}`
+      }
+      return roomMinArea || roomMaxArea
     }
   },
   methods: {
