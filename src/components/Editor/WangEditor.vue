@@ -140,15 +140,12 @@ export default {
       const img = new Image()
       img.src = url
       img.onload = () => {
-        // 图片必须加载完成才能获取尺寸
-        if (img.width > 600) {
-          this.setValue(
-            this.editorContent.replace(
-              '<img src="' + url + '"',
-              '<img src="' + url + '" width="600"'
-            )
+        this.setValue(
+          this.editorContent.replace(
+            '<img src="' + url + '"',
+            '<img src="' + url + '" width="100%"'
           )
-        }
+        )
       }
     },
     setValue (val) {
